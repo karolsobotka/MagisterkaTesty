@@ -8,63 +8,97 @@ import org.testng.annotations.*;
 
 import java.io.File;
 import java.time.Duration;
-public class SeleniumTest {
 
-    WebDriver driver;
+import static org.testng.AssertJUnit.assertEquals;
+
+public class SeleniumTest {
+    private WebDriver driver;
+    private WebDriverWait wait;
+
     @BeforeTest
     static void setupClass() {
         WebDriverManager.edgedriver().setup();
     }
 
-    @BeforeMethod
-    public void setup() {
 
+    @BeforeMethod
+    public void setUp() {
+        // Set path to chromedriver if necessary
         driver = new EdgeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
     @Test
-    public void testEndToEnd(){
+    public void testBuyArgusAllWeatherTank() throws InterruptedException {
+        driver.get("https://magento.softwaretestingboard.com/");
 
-        driver.get("https://ultimateqa.com/complicated-page");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("accept-btn")));
 
-        // Fill in the first name
-        WebElement firstName = driver.findElement(By.id("et_pb_contact_name_0"));
-        firstName.sendKeys("John");
+        element.click();
+        WebElement search = driver.findElement(By.name("q"));
+        search.click();
+        search.sendKeys("argus"+Keys.RETURN);
 
-        // Fill in the message
-        WebElement message = driver.findElement(By.id("et_pb_contact_message_0"));
-        message.sendKeys("This is a test message.");
+        driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[3]/div[1]/div[2]/div[2]/ol/li/div/a/span/span/img")).click();
 
-        // Click on the captcha checkbox (if present)
-        WebElement captchaQuestion = driver.findElement(By.className("et_pb_contact_captcha_question"));
-        String questionText = captchaQuestion.getText(); // e.g., "3 + 7"
-        int answer = evaluateMathExpression(questionText);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("option-label-size-143-item-166")));
+        driver.findElement(By.id("option-label-size-143-item-166")).click();
+        driver.findElement(By.id("option-label-color-93-item-52")).click();
 
-        WebElement captchaInput = driver.findElement(By.name("et_pb_contact_captcha_0"));
-        captchaInput.sendKeys(String.valueOf(answer));
+        driver.findElement(By.id("product-addtocart-button")).click();
 
-        // Submit the form
-        WebElement submitButton = driver.findElement(By.cssSelector(".et_pb_contact_submit"));
-        submitButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.message-success")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a.action.showcart"))).click();
+
+        WebElement checkoutBtn = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//span[text()='View and Edit Cart']")));
+        checkoutBtn.click();
+
+        WebElement proceed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//*[@id=\"maincontent\"]/div[3]/div/div[2]/div[1]/ul/li[1]/button")));
+        proceed.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("street[0]"))).sendKeys("123 Test Street");
+        driver.findElement(By.id("customer-email")).sendKeys("john.doe@test.com");
+        driver.findElement(By.name("firstname")).sendKeys("John");
+        driver.findElement(By.name("lastname")).sendKeys("Doe");
+        driver.findElement(By.name("city")).sendKeys("Testville");
+        driver.findElement(By.name("postcode")).sendKeys("12345");
+        driver.findElement(By.name("telephone")).sendKeys("1234567890");
+
+
+        WebElement countryDropdown = driver.findElement(By.name("country_id"));
+        countryDropdown.sendKeys("United States");
+
+        WebElement regionDropdown = driver.findElement(By.name("region_id"));
+        regionDropdown.sendKeys("New York");
+
+        driver.findElement(By.name("ko_unique_1")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.continue"))).click();
+
+
+        Thread.sleep(2000);
+        WebElement placeOrderButton =
+                wait.until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//*[@title='Place Order']")));
+        placeOrderButton.click();
+
+        Thread.sleep(12000);
+
+        WebElement successHeading = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.cssSelector("h1.page-title")));
+
+        String confirmationText = successHeading.getText().trim();
+        assertEquals("Thank you for your purchase!", confirmationText);
     }
-    private static int evaluateMathExpression(String expression) {
-        String[] parts = expression.split(" ");
-        int num1 = Integer.parseInt(parts[0]);
-        String op = parts[1];
-        int num2 = Integer.parseInt(parts[2]);
-
-        return switch (op) {
-            case "+" -> num1 + num2;
-            case "-" -> num1 - num2;
-            default -> 0;
-        };
-    }
-
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
