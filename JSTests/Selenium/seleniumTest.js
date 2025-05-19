@@ -8,7 +8,6 @@ describe('Buy Argus All-Weather Tank - Magento Demo (Edge)', function () {
     let driver;
 
     before(async () => {
-        // Setup Edge Options
         let options = new edge.Options();
         options.addArguments('start-maximized');
 
