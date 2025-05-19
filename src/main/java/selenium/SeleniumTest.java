@@ -23,7 +23,6 @@ public class SeleniumTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set path to chromedriver if necessary
         driver = new EdgeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -34,7 +33,7 @@ public class SeleniumTest {
         driver.get("https://magento.softwaretestingboard.com/");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("accept-btn")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("accept-btn")));
 
         element.click();
         WebElement search = driver.findElement(By.name("q"));
