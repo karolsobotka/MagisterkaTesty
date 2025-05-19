@@ -3,10 +3,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.*;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.io.File;
 import java.time.Duration;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -32,7 +30,7 @@ public class SeleniumTest {
     public void testBuyArgusAllWeatherTank() throws InterruptedException {
         driver.get("https://magento.softwaretestingboard.com/");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("accept-btn")));
 
         element.click();
