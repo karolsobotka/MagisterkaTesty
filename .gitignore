@@ -35,6 +35,9 @@ build/
 .vscode/
 CSharpTests/RestSharpTests/bin
 CSharpTests/RestSharpTests/obj
+CSharpTests/Selenium/obj
+CSharpTests/Selenium/bin
+
 
 ### JS tests ###
 JSTests/node_modules
