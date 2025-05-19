@@ -1,7 +1,11 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect, chromium} = require('@playwright/test');
 
 test.describe('Buy Argus All-Weather Tank - Magento Demo', () => {
-    test('should search and buy Argus All-Weather Tank', async ({ page }) => {
+    test('should search and buy Argus All-Weather Tank', async () => {
+        const browser = await chromium.launch({ headless: false });
+        const context = await browser.newContext();  // create headed context
+        const page = await context.newPage();
+
         await page.goto('https://magento.softwaretestingboard.com/');
         await page.waitForTimeout(1000);
 
