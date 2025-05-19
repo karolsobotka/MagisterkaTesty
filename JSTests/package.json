@@ -13,5 +13,10 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^14.3.3"
+  },
+  "dependencies": {
+    "edgedriver": "^6.1.1",
+    "mocha": "^11.4.0",
+    "selenium-webdriver": "^4.32.0"
   }
 }
