@@ -33,6 +33,19 @@ build/
 
 ### VS Code ###
 .vscode/
+CSharpTests/RestSharpTests/bin
+CSharpTests/RestSharpTests/obj
+
+### JS tests ###
+JSTests/node_modules
+JSTests/test-results
+
+### PythonTests ###
+PythonTests/Playwright/__pycache__
+PythonTests/Requests/__pycache__
+PythonTests/Selenium/__pycache__
+PythonTests/UnitTests/__pycache__
+
 
 ### Mac OS ###
 .DS_Store
