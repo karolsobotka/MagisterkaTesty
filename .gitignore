@@ -39,6 +39,8 @@ CSharpTests/Selenium/obj
 CSharpTests/Selenium/bin
 CSharpTests/Playwright/bin
 CSharpTests/Playwright/obj
+CSharpTests/UnitTest/obj
+CSharpTests/UnitTest/bin
 
 
 ### JS tests ###

@@ -48,7 +48,7 @@ public class PlaywrightTest {
 
             page.locator("a.action.showcart").click();
             page.locator("span:has-text('View and Edit Cart')").click();
-            page.waitForTimeout(1000); 
+            page.waitForTimeout(1000);
 
             page.locator("span:has-text('Proceed to Checkout')").click();
 
