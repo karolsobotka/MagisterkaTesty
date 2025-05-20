@@ -41,6 +41,10 @@ CSharpTests/Playwright/bin
 CSharpTests/Playwright/obj
 CSharpTests/UnitTest/obj
 CSharpTests/UnitTest/bin
+CSharpTests/cucumber/bin
+CSharpTests/cucumber/obj
+CSharpTests/specflow/bin
+CSharpTests/specflow/obj
 
 
 ### JS tests ###

@@ -29,7 +29,6 @@ public class GoogleSearchSteps {
 
     @Then("the page title should contain {string}")
     public void the_page_title_should_contain(String query) {
-        // Wait a bit for page to load (simple wait)
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
