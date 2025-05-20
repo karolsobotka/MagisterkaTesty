@@ -5,11 +5,13 @@ const assert = require('assert');
 let driver;
 
 Given('I open Google homepage', async function () {
-    driver = await new Builder().forBrowser('edge').build();
+    driver = await new Builder().forBrowser('chrome').build();
     await driver.get('https://www.google.com');
 });
 
 When('I search for {string}', async function (query) {
+    driver.findElement(By.xpath('//*[@id="L2AGLb"]/div')).click();
+
     const searchBox = await driver.findElement(By.name('q'));
     await searchBox.sendKeys(query);
     await searchBox.submit();

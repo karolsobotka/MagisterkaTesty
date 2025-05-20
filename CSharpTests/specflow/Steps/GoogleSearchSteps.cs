@@ -4,8 +4,7 @@ using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 using System.Threading;
 
-namespace YourNamespace.Steps
-{
+
     [Binding]
     public class GoogleSearchSteps
     {
@@ -21,6 +20,8 @@ namespace YourNamespace.Steps
         [When(@"I search for ""(.*)""")]
         public void WhenISearchFor(string query)
         {
+            driver.FindElement(By.xpath("//*[@id=\"L2AGLb\"]/div")).Click();
+
             var searchBox = driver.FindElement(By.Name("q"));
             searchBox.SendKeys(query);
             searchBox.Submit();
@@ -34,4 +35,4 @@ namespace YourNamespace.Steps
             driver.Quit();
         }
     }
-}
+
