@@ -1,4 +1,4 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const {Builder, By, Key, until} = require('selenium-webdriver');
 const edge = require('selenium-webdriver/edge');
 const assert = require('assert');
 
@@ -26,7 +26,7 @@ describe('Buy Argus All-Weather Tank - Magento Demo (Edge)', function () {
     it('should search and buy Argus All-Weather Tank', async () => {
         await driver.get('https://magento.softwaretestingboard.com/');
 
-        await driver.sleep(1000); // wait 0.5 sec
+        await driver.sleep(1000);
         try {
             const acceptBtn = await driver.wait(until.elementLocated(By.id('accept-btn')), 10000);
             await driver.wait(until.elementIsVisible(acceptBtn), 5000);

@@ -10,6 +10,7 @@ import java.time.Duration;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class SeleniumTest {
+
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -83,7 +84,7 @@ public class SeleniumTest {
                         By.xpath("//*[@title='Place Order']")));
         placeOrderButton.click();
 
-        Thread.sleep(12000);
+        Thread.sleep(3000);
 
         WebElement successHeading = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.cssSelector("h1.page-title")));

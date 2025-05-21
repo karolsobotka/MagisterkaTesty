@@ -82,7 +82,7 @@ namespace SeleniumTests
             var placeOrderButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@title='Place Order']")));
             placeOrderButton.Click();
 
-            System.Threading.Thread.Sleep(12000);
+            System.Threading.Thread.Sleep(4000);
 
             var successHeading = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("h1.page-title")));
             string confirmationText = successHeading.Text.Trim();
